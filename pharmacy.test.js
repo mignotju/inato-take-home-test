@@ -82,4 +82,30 @@ describe("[Pharmacy] updateBenefitValue", () => {
       ).toEqual([new Drug("Magic Pill", 7, 0)]);
     });
   });
+
+  describe("Herbal Tea", () => {
+    it("should increase the benefit by 1 and decrease expiresIn by 1 when expiresIn > 0", () => {
+      expect(
+        new Pharmacy([new Drug("Herbal Tea", 5, 10)]).updateBenefitValue()
+      ).toEqual([new Drug("Herbal Tea", 4, 11)]);
+    });
+
+    it("should increase the benefit by 2 and decrease expiresIn by 1 when expiresIn = 0", () => {
+      expect(
+        new Pharmacy([new Drug("Herbal Tea", 0, 10)]).updateBenefitValue()
+      ).toEqual([new Drug("Herbal Tea", -1, 12)]);
+    });
+
+    it("should increase the benefit by 2 and decrease expiresIn by 1 when expiresIn < 0", () => {
+      expect(
+        new Pharmacy([new Drug("Herbal Tea", -5, 10)]).updateBenefitValue()
+      ).toEqual([new Drug("Herbal Tea", -6, 12)]);
+    });
+
+    it("should not increase the benefit and decrease expiresIn by 1 when benefit = 50", () => {
+      expect(
+        new Pharmacy([new Drug("Herbal Tea", 5, 50)]).updateBenefitValue()
+      ).toEqual([new Drug("Herbal Tea", 4, 50)]);
+    });
+  });
 });
