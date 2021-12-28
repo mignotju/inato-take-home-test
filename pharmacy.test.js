@@ -108,4 +108,48 @@ describe("[Pharmacy] updateBenefitValue", () => {
       ).toEqual([new Drug("Herbal Tea", 4, 50)]);
     });
   });
+
+  describe("Fervex", () => {
+    it("should increase the benefit by 1 and decrease expiresIn by 1 when expiresIn > 10", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", 15, 14)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", 14, 15)]);
+    });
+
+    it("should increase the benefit by 2 and decrease expiresIn by 1 when expiresIn <= 10 and >5 (high limit)", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", 10, 14)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", 9, 16)]);
+    });
+
+    it("should increase the benefit by 2 and decrease expiresIn by 1 when expiresIn <= 10 and >5 (low limit)", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", 6, 12)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", 5, 14)]);
+    });
+
+    it("should increase the benefit by 3 and decrease expiresIn by 1 when expiresIn <= 5 and >0 (high limit)", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", 5, 14)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", 4, 17)]);
+    });
+
+    it("should increase the benefit by 3 and decrease expiresIn by 1 when expiresIn <= 5 and >0 (low limit)", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", 1, 12)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", 0, 15)]);
+    });
+
+    it("should drop the benefit to 0 and decrease expiresIn by 1 when expiresIn = 0", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", 0, 14)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", -1, 0)]);
+    });
+
+    it("should drop the benefit to 0 and decrease expiresIn by 1 when expiresIn < 0", () => {
+      expect(
+        new Pharmacy([new Drug("Fervex", -3, 20)]).updateBenefitValue()
+      ).toEqual([new Drug("Fervex", -4, 0)]);
+    });
+  });
 });
