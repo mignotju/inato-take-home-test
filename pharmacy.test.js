@@ -56,4 +56,30 @@ describe("[Pharmacy] updateBenefitValue", () => {
       ]);
     });
   });
+
+  describe("Magic Pill", () => {
+    it("should always keep expiresIn and benefit same as entry (expiresIn > 0)", () => {
+      expect(
+        new Pharmacy([new Drug("Magic Pill", 5, 10)]).updateBenefitValue()
+      ).toEqual([new Drug("Magic Pill", 5, 10)]);
+    });
+
+    it("should always keep expiresIn and benefit same as entry (expiresIn = 0)", () => {
+      expect(
+        new Pharmacy([new Drug("Magic Pill", 0, 13)]).updateBenefitValue()
+      ).toEqual([new Drug("Magic Pill", 0, 13)]);
+    });
+
+    it("should always keep expiresIn and benefit same as entry (expiresIn < 0)", () => {
+      expect(
+        new Pharmacy([new Drug("Magic Pill", -4, 12)]).updateBenefitValue()
+      ).toEqual([new Drug("Magic Pill", -4, 12)]);
+    });
+
+    it("should always keep expiresIn and benefit same as entry (benefit = 0)", () => {
+      expect(
+        new Pharmacy([new Drug("Magic Pill", 7, 0)]).updateBenefitValue()
+      ).toEqual([new Drug("Magic Pill", 7, 0)]);
+    });
+  });
 });
