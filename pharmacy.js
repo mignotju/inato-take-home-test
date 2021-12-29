@@ -19,8 +19,7 @@ export class Pharmacy {
           if (this.drugs[i].benefit < 50) {
             this.drugs[i].benefit = this.drugs[i].benefit + 1;
           }
-          this.drugs[i].expiresIn = this.drugs[i].expiresIn - 1;
-          if (this.drugs[i].expiresIn < 0) {
+          if (this.drugs[i].expiresIn <= 0) {
             if (this.drugs[i].benefit < 50) {
               this.drugs[i].benefit = this.drugs[i].benefit + 1;
             }
@@ -40,8 +39,7 @@ export class Pharmacy {
               }
             }
           }
-          this.drugs[i].expiresIn = this.drugs[i].expiresIn - 1;
-          if (this.drugs[i].expiresIn < 0) {
+          if (this.drugs[i].expiresIn <= 0) {
             this.drugs[i].benefit =
               this.drugs[i].benefit - this.drugs[i].benefit;
           }
@@ -51,14 +49,15 @@ export class Pharmacy {
             this.drugs[i].benefit = this.drugs[i].benefit - 1;
           }
 
-          this.drugs[i].expiresIn = this.drugs[i].expiresIn - 1;
-          if (this.drugs[i].expiresIn < 0) {
+          if (this.drugs[i].expiresIn <= 0) {
             if (this.drugs[i].benefit > 0) {
               this.drugs[i].benefit = this.drugs[i].benefit - 1;
             }
           }
           break;
       }
+
+      if (this.drugs[i].name != "Magic Pill") this.drugs[i].expiresIn--;
     }
 
     return this.drugs;
