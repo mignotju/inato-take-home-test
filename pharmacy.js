@@ -1,3 +1,5 @@
+const MAX_BENEFIT_VALUE = 50;
+
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
@@ -12,14 +14,8 @@ export class Pharmacy {
   }
 
   updateHerbalTeaBenefitValue(drug) {
-    if (drug.benefit < 50) {
-      drug.benefit = drug.benefit + 1;
-    }
-    if (drug.expiresIn <= 0) {
-      if (drug.benefit < 50) {
-        drug.benefit = drug.benefit + 1;
-      }
-    }
+    const benefitToAdd = drug.expiresIn > 0 ? 1 : 2;
+    drug.benefit = Math.min(MAX_BENEFIT_VALUE, drug.benefit + benefitToAdd);
   }
 
   updateFervexBenefitValue(drug) {
