@@ -41,6 +41,18 @@ export class Pharmacy {
     }
   }
 
+  updateDefaultDrugBenefitValue(drug) {
+    if (drug.benefit > 0) {
+      drug.benefit = drug.benefit - 1;
+    }
+
+    if (drug.expiresIn <= 0) {
+      if (drug.benefit > 0) {
+        drug.benefit = drug.benefit - 1;
+      }
+    }
+  }
+
   updateBenefitValue() {
     for (var i = 0; i < this.drugs.length; i++) {
       switch (this.drugs[i].name) {
@@ -53,15 +65,7 @@ export class Pharmacy {
           this.updateFervexBenefitValue(this.drugs[i]);
           break;
         default:
-          if (this.drugs[i].benefit > 0) {
-            this.drugs[i].benefit = this.drugs[i].benefit - 1;
-          }
-
-          if (this.drugs[i].expiresIn <= 0) {
-            if (this.drugs[i].benefit > 0) {
-              this.drugs[i].benefit = this.drugs[i].benefit - 1;
-            }
-          }
+          this.updateDefaultDrugBenefitValue(this.drugs[i]);
           break;
       }
 
