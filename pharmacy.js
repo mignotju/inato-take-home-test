@@ -2,6 +2,13 @@ const MAX_BENEFIT_VALUE = 50;
 const MIN_BENEFIT_VALUE = 0;
 const BENEFIT_INCREMENT = 1;
 
+const DRUG_NAME = {
+  MAGIC_PILL: "Magic Pill",
+  HERBAL_TEA: "Herbal Tea",
+  FERVEX: "Fervex",
+  DAFALGAN: "Dafalgan",
+};
+
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
@@ -64,15 +71,15 @@ export class Pharmacy {
   updateBenefitValue() {
     for (var i = 0; i < this.drugs.length; i++) {
       switch (this.drugs[i].name) {
-        case "Magic Pill":
+        case DRUG_NAME.MAGIC_PILL:
           break;
-        case "Herbal Tea":
+        case DRUG_NAME.HERBAL_TEA:
           this.updateHerbalTeaBenefitValue(this.drugs[i]);
           break;
-        case "Fervex":
+        case DRUG_NAME.FERVEX:
           this.updateFervexBenefitValue(this.drugs[i]);
           break;
-        case "Dafalgan":
+        case DRUG_NAME.DAFALGAN:
           this.updateDefaultDrugBenefitValue(this.drugs[i], 2);
           break;
         default:
@@ -80,7 +87,7 @@ export class Pharmacy {
           break;
       }
 
-      if (this.drugs[i].name != "Magic Pill") this.drugs[i].expiresIn--;
+      if (this.drugs[i].name != DRUG_NAME.MAGIC_PILL) this.drugs[i].expiresIn--;
     }
 
     return this.drugs;
