@@ -19,22 +19,15 @@ export class Pharmacy {
   }
 
   updateFervexBenefitValue(drug) {
-    if (drug.benefit < 50) {
-      drug.benefit = drug.benefit + 1;
-      if (drug.expiresIn < 11) {
-        if (drug.benefit < 50) {
-          drug.benefit = drug.benefit + 1;
-        }
-      }
-      if (drug.expiresIn < 6) {
-        if (drug.benefit < 50) {
-          drug.benefit = drug.benefit + 1;
-        }
-      }
-    }
     if (drug.expiresIn <= 0) {
-      drug.benefit = drug.benefit - drug.benefit;
+      drug.benefit = 0;
+      return;
     }
+    let benefitToAdd;
+    if (drug.expiresIn > 10) benefitToAdd = 1;
+    else if (drug.expiresIn > 5) benefitToAdd = 2;
+    else if (drug.expiresIn > 0) benefitToAdd = 3;
+    drug.benefit = Math.min(MAX_BENEFIT_VALUE, drug.benefit + benefitToAdd);
   }
 
   updateDefaultDrugBenefitValue(drug) {
