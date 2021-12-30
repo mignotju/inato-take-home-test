@@ -31,6 +31,11 @@ export class Pharmacy {
     drug.benefit = Math.min(MAX_BENEFIT_VALUE, drug.benefit + benefitToAdd);
   }
 
+  updateDafalganBenefitValue(drug) {
+    const benefitToRemove = drug.expiresIn > 0 ? 2 : 4;
+    drug.benefit = Math.max(MIN_BENEFIT_VALUE, drug.benefit - benefitToRemove);
+  }
+
   updateDefaultDrugBenefitValue(drug) {
     const benefitToRemove = drug.expiresIn > 0 ? 1 : 2;
     drug.benefit = Math.max(MIN_BENEFIT_VALUE, drug.benefit - benefitToRemove);
@@ -48,11 +53,7 @@ export class Pharmacy {
           this.updateFervexBenefitValue(this.drugs[i]);
           break;
         case "Dafalgan":
-          const benefitToRemove = this.drugs[i].expiresIn > 0 ? 2 : 4;
-          this.drugs[i].benefit = Math.max(
-            MIN_BENEFIT_VALUE,
-            this.drugs[i].benefit - benefitToRemove
-          );
+          this.updateDafalganBenefitValue(this.drugs[i]);
           break;
         default:
           this.updateDefaultDrugBenefitValue(this.drugs[i]);
