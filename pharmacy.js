@@ -35,8 +35,11 @@ export class Pharmacy {
 
   updateDafalganBenefitValue(drug) {
     const benefitToRemove =
-      drug.expiresIn > 0 ? 2 * BENEFIT_INCREMENT : 4 * BENEFIT_INCREMENT;
-    drug.benefit = Math.max(MIN_BENEFIT_VALUE, drug.benefit - benefitToRemove);
+      drug.expiresIn > 0 ? BENEFIT_INCREMENT : 2 * BENEFIT_INCREMENT;
+    drug.benefit = Math.max(
+      MIN_BENEFIT_VALUE,
+      drug.benefit - 2 * benefitToRemove
+    );
   }
 
   updateDefaultDrugBenefitValue(drug) {
