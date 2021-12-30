@@ -1,4 +1,5 @@
 const MAX_BENEFIT_VALUE = 50;
+const MIN_BENEFIT_VALUE = 0;
 
 export class Drug {
   constructor(name, expiresIn, benefit) {
@@ -31,15 +32,8 @@ export class Pharmacy {
   }
 
   updateDefaultDrugBenefitValue(drug) {
-    if (drug.benefit > 0) {
-      drug.benefit = drug.benefit - 1;
-    }
-
-    if (drug.expiresIn <= 0) {
-      if (drug.benefit > 0) {
-        drug.benefit = drug.benefit - 1;
-      }
-    }
+    const benefitToRemove = drug.expiresIn > 0 ? 1 : 2;
+    drug.benefit = Math.max(MIN_BENEFIT_VALUE, drug.benefit - benefitToRemove);
   }
 
   updateBenefitValue() {
