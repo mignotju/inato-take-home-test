@@ -1,5 +1,6 @@
 const MAX_BENEFIT_VALUE = 50;
 const MIN_BENEFIT_VALUE = 0;
+const BENEFIT_INCREMENT = 1;
 
 export class Drug {
   constructor(name, expiresIn, benefit) {
@@ -15,7 +16,8 @@ export class Pharmacy {
   }
 
   updateHerbalTeaBenefitValue(drug) {
-    const benefitToAdd = drug.expiresIn > 0 ? 1 : 2;
+    const benefitToAdd =
+      drug.expiresIn > 0 ? BENEFIT_INCREMENT : 2 * BENEFIT_INCREMENT;
     drug.benefit = Math.min(MAX_BENEFIT_VALUE, drug.benefit + benefitToAdd);
   }
 
@@ -32,12 +34,14 @@ export class Pharmacy {
   }
 
   updateDafalganBenefitValue(drug) {
-    const benefitToRemove = drug.expiresIn > 0 ? 2 : 4;
+    const benefitToRemove =
+      drug.expiresIn > 0 ? 2 * BENEFIT_INCREMENT : 4 * BENEFIT_INCREMENT;
     drug.benefit = Math.max(MIN_BENEFIT_VALUE, drug.benefit - benefitToRemove);
   }
 
   updateDefaultDrugBenefitValue(drug) {
-    const benefitToRemove = drug.expiresIn > 0 ? 1 : 2;
+    const benefitToRemove =
+      drug.expiresIn > 0 ? BENEFIT_INCREMENT : 2 * BENEFIT_INCREMENT;
     drug.benefit = Math.max(MIN_BENEFIT_VALUE, drug.benefit - benefitToRemove);
   }
 
