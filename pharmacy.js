@@ -55,6 +55,12 @@ export class Pharmacy {
     );
   }
 
+  /*
+  This function does 2 things: update benefit and expiresIn 
+  Reading its name we don't know it updates expiresIn value. 
+  If I had acces to the whole codebase I would have cut it into 2 functions: 
+  updateBenefitValue and updateExpiresInValue 
+  */
   updateBenefitValue() {
     for (var i = 0; i < this.drugs.length; i++) {
       switch (this.drugs[i].name) {
