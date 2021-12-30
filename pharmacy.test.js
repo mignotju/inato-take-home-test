@@ -173,3 +173,18 @@ describe("[Pharmacy] updateBenefitValue", () => {
     });
   });
 });
+
+describe("[Drug] constructor", () => {
+  it("should create Drug with benefit input value when input value = 50", () => {
+    expect(new Drug("DefaultDrug", -2, 50).benefit).toEqual(50);
+  });
+  it("should create Drug with benefit = 50 (max benefit value) when input benefit > 50", () => {
+    expect(new Drug("Dafalgan", -2, 51).benefit).toEqual(50);
+  });
+  it("should create Drug with benefit input value when input value = 0", () => {
+    expect(new Drug("DefaultDrug", -2, 0).benefit).toEqual(0);
+  });
+  it("should create Drug with benefit = 0 (min benefit value) when input benefit < 0", () => {
+    expect(new Drug("Dafalgan", -2, -1).benefit).toEqual(0);
+  });
+});

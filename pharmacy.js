@@ -6,6 +6,19 @@ export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
     this.expiresIn = expiresIn;
+    /*
+    As we don't want to break Drug API in this exercice, I do a silent catch of wrong benefit values
+    In real life, I would have discussed with the Product team to know what is the more adapted thing to do: 
+    throw an Error or silent catch error
+    */
+    if (benefit > MAX_BENEFIT_VALUE) {
+      this.benefit = MAX_BENEFIT_VALUE;
+      return;
+    }
+    if (benefit < MIN_BENEFIT_VALUE) {
+      this.benefit = MIN_BENEFIT_VALUE;
+      return;
+    }
     this.benefit = benefit;
   }
 }
